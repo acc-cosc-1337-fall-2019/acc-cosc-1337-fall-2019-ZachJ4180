@@ -16,7 +16,7 @@ string get_generation(int year)
 	{
 		return "Centenial";
 	}
-	else if (year >= 1997 && year <= 1995)
+	else if (year >= 1977 && year <= 1995)
 	{
 		return "Millenial";
 	}

@@ -10,10 +10,10 @@
 //return 'Invalid Option' otherwise
 string menu(int menu_option)
 {
-	switch (menu_option)
+	switch (menu_option)	//if no return in a case, put  " break; "
 	{
 	case 1:					//if menu_option == 1...
-		retun "Option 1";
+		return "Option 1";
 	case 2:
 		return "Option 2";
 	case 3:
@@ -23,6 +23,5 @@ string menu(int menu_option)
 	default:
 		return "Invalid";
 	}
-	
-	return string;
+
 }

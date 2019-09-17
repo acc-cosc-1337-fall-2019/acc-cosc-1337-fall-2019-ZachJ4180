@@ -10,7 +10,7 @@ bool is_even(int num)
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
