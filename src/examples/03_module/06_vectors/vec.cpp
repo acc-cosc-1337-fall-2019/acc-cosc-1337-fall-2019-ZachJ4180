@@ -27,6 +27,8 @@ and displays the numbers to screen using an indexed for loop as follows: 9 10 99
 
 void loop_vector_w_index(std::vector<int> nums)
 {
+	nums[0] = 1000;
+
 	for (int i = 0; i < nums.size(); i++)
 	{
 		std::cout << nums[i] << "\n";
@@ -41,6 +43,8 @@ and displays the numbers to screen using an indexed for loop as follows : 9 10 9
 
 void loop_vector_w_index_ref(std::vector<int> & nums)
 {//alters the parameter					  ^
+	nums[0] = 1000;
+
 	for (int i = 0; i < nums.size(); i++)
 	{
 		std::cout << nums[i] << "\n";
@@ -63,10 +67,31 @@ void loop_vector_w_index_const(const std::vector<int> & nums)
 	}
 }
 
-void loop_vector_w_for_ranged(const std::vector<int> & nums)
+void loop_vector_w_for_ranged(std::vector<int> & nums)
 {
 	for (auto num : nums)
-	{
+	{//		 ^		Changes a copy of every element within the vector
+		num = 1000;
+
 		std::cout << num << "\n";
 	}
+}
+
+void loop_vector_w_for_ranged_ref_var(std::vector<int> & nums)
+{
+	for (auto & num : nums)
+	{//		  ^		Changes the ORIGINAL VALUE of every element within the vector
+		num = 1000;
+
+		std::cout << num << "\n";
+	}
+}
+
+std::vector<int> ret_vec_int()
+{
+	std::vector<int> my_vector(9, 2);
+
+	my_vector.push_back(3);	//adds to the end of the vector: "9, 2, 3"
+
+	return my_vector;
 }
