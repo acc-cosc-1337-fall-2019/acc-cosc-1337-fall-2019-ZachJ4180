@@ -2,7 +2,7 @@
 
 //bank_account.cpp
 
-BankAccount::BankAccount()	//constructor, run first when class is referenced or called
+BankAccount::BankAccount()	//constructor, runs first when class is referenced or called
 {
 	//code to read 'balance' variable from database
 
@@ -17,7 +17,15 @@ void BankAccount::deposit(int amount)
 	}
 }
 
-int BankAccount::get_balance()
+int BankAccount::get_balance() const	//need to initialize as const in '.h' as well
 {
 	return balance;
+}
+
+void BankAccount::withdraw(int amount)
+{
+	if (balance > amount)
+	{
+		balance -= amount;
+	}
 }
