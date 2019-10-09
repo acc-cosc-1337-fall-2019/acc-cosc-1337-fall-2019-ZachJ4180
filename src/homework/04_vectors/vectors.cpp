@@ -10,15 +10,15 @@ vector of intsparameter that returns the max value in a vector
 @return the max value in the vector
 */
 
-auto get_max_from_vector(vector numbers const)
+int get_max_from_vector(const vector<int> numbers)
 {
 	auto n = numbers[0];
 
 	for (auto element : numbers)
 	{
-		if (elements > n)
+		if (element > n)
 		{
-			n = elements;
+			n = element;
 		}
 	}
 
@@ -35,17 +35,21 @@ given a number returns true if prime or false if not prime
 
 bool is_prime(int number)
 {
-	for (int i = 2; i <= number; i++)
+	if (number <= 1) 
 	{
+		return false;
+	}
+
+	for (int i = 2; i < number; i++)
+	{
+			
 		if (number % i == 0)	//can the number be divided by anything other than 1?
 		{
 			return false;	//number is not prime
 		}
-		else
-		{
-			return true;	//number is prime
-		}
 	}
+	
+	return true;
 }
 
 /*
@@ -61,13 +65,13 @@ Make sure to use the is_prime function to determine if current
 number is prime.
 */
 
-vector vector_of_primes(int number)
+vector<int> vector_of_primes(int number)
 {
-	vector nums;
+	vector<int> nums;
 
 	for (int n = 0; n <= number; n++)
 	{
-		if (n.is_prime())
+		if (is_prime(n))
 		{
 			nums.push_back(n);
 		}
