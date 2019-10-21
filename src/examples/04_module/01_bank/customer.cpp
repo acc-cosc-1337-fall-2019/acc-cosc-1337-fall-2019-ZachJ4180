@@ -10,7 +10,7 @@ void Customer::add_account(BankAccount act)
 	
 	accounts.push_back(act);
 }
-//ostream & operator << (ostream & out, const Customer & c)
+//ostream & operator << (ostream & out, const Customer & c) //customer.h declaration syntax
   ostream & operator << (ostream & out, const Customer & c)
 {
 	out << "Customer accounts: " << "\n";

@@ -8,22 +8,22 @@
 using std::cout;
 using std::cin;
 using std::vector;
+using std::reference_wrapper;	//
 
 int main()
 {
-	CheckingAccount checking(1500);
+	CheckingAccount c(1500);
 
-	cout << "\n" << "Checking get_balance: " << checking.get_balance() << "\n";
-
-
-	SavingsAccount savings(500);
-
-	cout << "\n" << "Savings get_balance: " << savings.get_balance() << "\n";
+	SavingsAccount s(500);
 
 
-	BankAccount & account = savings;
+	vector <reference_wrapper<BankAccount>> accounts { c, s };
 
-	cout << "\n" << "Reference to 'Savings get_balance': " << account.get_balance() << "\n";
+
+	for (auto act : accounts) 
+	{
+		cout << "Balance: " << act.get().get_balance() << "\n";	//.get() returns a class ref
+	}
 
 
 	return 0;
