@@ -31,8 +31,8 @@ int main()
 
 /*
 minnow		-				-
-trout		-	bluegill	-
-pike		-	perch		-	box turtle
+trout		-	bluegill	-	box turtle
+pike		-	perch		-	flathead turtle
 sturgeon	-	catfish		-	snapping turtle
 gar(?)		-				-	gator
 */
@@ -55,14 +55,14 @@ moose			-				-	bear			-
 /*
 Human:
 	sharp flint	-	sleep spot	-	fur clothing		-	
-	flint knife	-	sleep roll	-	warm clothing		-	waist bag
-	flint spear	-	lean-to		-	cloth clothing		-	shoulder bag
-	flint axe	-	a-frame		-	warm clothing x2	-	sled
-	bow/arrow	-	longhouse	-						-
+	flint knife	-	sleep roll	-	hide clothing		-	waist bag
+	flint spear	-	lean-to		-						-	shoulder bag
+	flint axe	-	a-frame		-	cloth cloting		-	sled
+	bow/arrow	-	longhouse	-	padded clothing		-
 */
 
 /*
-herbalism		>	identification	>	health			>	medicine
+herbalism		>	identification	>	medicine v1		>	medicine v2
 manipulation	>	gathering		>	butchering		>	harvesting
 farming			>	identification	>	herbs			>	crops
 combat			>	attack			>	block/alt		>	proficiency
