@@ -6,7 +6,7 @@ ostream & operator<<(ostream & out, TicTacToeManager & m)
 {
 	for (auto game : m.games)
 	{
-		out << game;
+		out << game << "\n";
 	}
 
 

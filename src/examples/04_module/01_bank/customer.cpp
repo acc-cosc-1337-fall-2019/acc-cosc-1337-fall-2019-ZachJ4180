@@ -1,6 +1,7 @@
 //customer.cpp
 
 #include "customer.h"
+#include <iostream>
 
 using std::ostream;
 

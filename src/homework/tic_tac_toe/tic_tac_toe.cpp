@@ -37,11 +37,6 @@ void TicTacToe::mark_board(int position)
 {
 	pegs[position - 1] = next_player;
 
-	if (game_over() == false)
-	{
-		set_next_player();
-	}
-
 	set_next_player();
 }
 
@@ -120,8 +115,7 @@ bool TicTacToe::check_row_win()
 
 bool TicTacToe::check_diagonal_win()
 {
-	if(pegs[0] == pegs[4] && pegs[4] == pegs[8] && pegs[0] != " " ||
-	   pegs[2] == pegs[4] && pegs[4] == pegs[6] && pegs[2] != " ")
+	if(pegs[0] == pegs[4] && pegs[4] == pegs[8] && pegs[0] != " " || pegs[2] == pegs[4] && pegs[4] == pegs[6] && pegs[2] != " ")
 	{
 		return true;
 	}

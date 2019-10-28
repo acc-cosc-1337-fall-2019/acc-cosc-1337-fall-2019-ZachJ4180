@@ -12,18 +12,13 @@ using std::reference_wrapper;	//
 
 int main()
 {
-	CheckingAccount c(1500);
+	int * ptr_num = new int(5);
 
-	SavingsAccount s(500);
+	cout << "Address of: " << ptr_num << std::endl;	//std::endl adds a new line ("\n")
 
+	cout << "Value pointed to: " << ptr_num;
 
-	vector <reference_wrapper<BankAccount>> accounts { c, s };
-
-
-	for (auto act : accounts) 
-	{
-		cout << "Balance: " << act.get().get_balance() << "\n";	//.get() returns a class ref
-	}
+	delete ptr_num;
 
 
 	return 0;
@@ -62,8 +57,9 @@ Human:
 */
 
 /*
-herbalism		>	identification	>	medicine v1		>	medicine v2
-manipulation	>	gathering		>	butchering		>	harvesting
-farming			>	identification	>	herbs			>	crops
-combat			>	attack			>	block/alt		>	proficiency
+Skills:
+	herbalism		>	identification	>	medicine v1		>	medicine v2
+	manipulation	>	gathering		>	butchering		>	harvesting
+	farming			>	identification	>	herbs			>	crops
+	combat			>	attack			>	block/alt		>	proficiency
 */

@@ -5,6 +5,7 @@
 #include <iostream>
 
 using std::vector;
+using std::ostream;
 
 class Customer
 {
