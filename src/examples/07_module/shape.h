@@ -3,11 +3,15 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <iostream>
+
+using std::cout;
+
 class Shape
 {
 public:
 
-	virtual void draw() {}
+	virtual void draw() = 0;	//pure virtual function witin an abstract class
 
 };
 

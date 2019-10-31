@@ -3,16 +3,18 @@
 #ifndef TIC_TAC_TOE_MANAGER_H
 #define TIC_TAC_TOE_MANAGER_H
 
+#include <functional>
 #include <vector>
 #include "tic_tac_toe.h"
 
 using std::vector;
+using std::reference_wrapper;
 
 class TicTacToeManager
 {
 public:
 
-	void save_game(const TicTacToe game);
+	void save_game(TicTacToe game);
 
 	friend ostream & operator << (ostream & out, TicTacToeManager & m);
 
@@ -22,7 +24,7 @@ private:
 	void update_winner_count(string winner);
 
 
-	vector <TicTacToe> games;
+	vector <reference_wrapper<TicTacToe>> games;
 
 
 	int x_win{ 0 };

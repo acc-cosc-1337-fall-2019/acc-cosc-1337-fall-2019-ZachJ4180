@@ -1,4 +1,6 @@
 #include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 //#include"tic_tac_toe.h"		//not required because tic_tac_toe.h is included in the manager.h
 #include<iostream>
 #include<string>
@@ -15,9 +17,35 @@ int main()
 
 	string player;
 
+
+	int game_type;
+
+
+	//vector<reference_wrapper<TicTacToe>> g;
+
+	//TicTacToe3 three;
+
+	//g.push_back(three);
+
+	
 	do
 	{
-		TicTacToe game;
+		cout << "Play win by 3 or win by 4: ";
+
+		cin >> game_type;
+
+
+		TicTacToe* game;
+
+
+		if (game_type == 3)
+		{
+			game = new TicTacToe3;
+		}
+		else
+		{
+			game = new TicTacToe4;
+		}
 
 
 		cout << "Enter X or O";
@@ -25,14 +53,14 @@ int main()
 		cin >> player;
 
 
-		game.start_game(player);
+		game->start_game(player);	//references the start_game() function within TTT3 & TTT4
 
 
-		while (game.game_over() == false)
+		while (game->game_over() == false)
 		{
-			cin >> game;
+			cin	 >> *game;
 
-			cout << game;
+			cout << *game;
 		}
 
 		manager.save_game(game);

@@ -4,13 +4,12 @@
 #define CIRCLE_H
 
 #include "shape.h"
-#include <iostream>
 
 class Circle : public Shape
 {
 public:
 
-	void draw() { std::cout << "Draw circle." << "\n"; }
+	void draw() override;
 
 };
 

@@ -10,13 +10,18 @@ using std::string; using std::vector;
 
 using std::ostream; using std::istream;
 
-//h
+
 /*
 Represents one game of tic tac toe.
 */
 class TicTacToe 
 {
 public:
+
+	TicTacToe() {};										//blank constructor
+
+	TicTacToe(int size) : pegs(size * size, " ") {};	//constructor + initializer
+
 
 	bool game_over();
 
@@ -36,15 +41,21 @@ public:
 	friend istream& operator>>(istream& in, TicTacToe& t);
 
 
+protected:
+
+	virtual bool check_column_win();
+
+	virtual bool check_row_win();		//virtual makes functions flexible between 3 and 4
+
+	virtual bool check_diagonal_win();
+
+
+	vector<string> pegs{};	//initializer: | 9 for x3 | 16 for x4 |
+
+
 private:
+
 	void set_next_player();
-
-
-	bool check_column_win();
-
-	bool check_row_win();
-
-	bool check_diagonal_win();
 
 
 	void clear_board();
@@ -53,9 +64,6 @@ private:
 
 
 	void set_winner();
-
-
-	vector<string> pegs{ 9, " " };//initializer
 
 
 	string next_player;
