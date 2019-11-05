@@ -1,7 +1,7 @@
 #include "tic_tac_toe_manager.h"
 #include "tic_tac_toe_3.h"
 #include "tic_tac_toe_4.h"
-//#include"tic_tac_toe.h"		//not required because tic_tac_toe.h is included in the manager.h
+//#include"tic_tac_toe.h"	//not required because tic_tac_toe.h is included in the manager.h
 #include<iostream>
 #include<string>
 //dont #include "main.h", makes an error with "game" class object
@@ -20,13 +20,6 @@ int main()
 
 	int game_type;
 
-
-	//vector<reference_wrapper<TicTacToe>> g;
-
-	//TicTacToe3 three;
-
-	//g.push_back(three);
-
 	
 	do
 	{
@@ -40,11 +33,11 @@ int main()
 
 		if (game_type == 3)
 		{
-			game = new TicTacToe3;
+			game = new TicTacToe3();
 		}
 		else
 		{
-			game = new TicTacToe4;
+			game = new TicTacToe4();
 		}
 
 
@@ -63,7 +56,7 @@ int main()
 			cout << *game;
 		}
 
-		manager.save_game(game);
+		manager.save_game(*game);
 
 
 		cout << "Game over: ";
