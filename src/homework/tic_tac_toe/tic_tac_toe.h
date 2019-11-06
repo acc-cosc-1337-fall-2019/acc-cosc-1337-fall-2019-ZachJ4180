@@ -1,5 +1,5 @@
 #ifndef TIC_TAC_TOE_H
-#define TIF_TAC_TOE_H
+#define TIC_TAC_TOE_H
 
 #include<string>
 #include<vector>

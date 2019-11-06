@@ -20,7 +20,7 @@ ostream & operator<<(ostream & out, TicTacToeManager & m)
 	return out;
 }
 
-void TicTacToeManager::save_game(TicTacToe game)
+void TicTacToeManager::save_game(TicTacToe& game)
 {
 	update_winner_count(game.get_winner());
 	
