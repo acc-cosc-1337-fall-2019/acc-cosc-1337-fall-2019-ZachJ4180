@@ -2,9 +2,9 @@
 
 //cpp
 
-ostream & operator<<(ostream & out, TicTacToeManager & m)
+ostream & operator<<(ostream & out, unique_ptr<TicTacToeManager> & m)
 {
-	for (auto game : m.games)
+	for (auto& game : m.games)
 	{
 		out << game << "\n";
 	}
@@ -20,11 +20,37 @@ ostream & operator<<(ostream & out, TicTacToeManager & m)
 	return out;
 }
 
-void TicTacToeManager::save_game(TicTacToe& game)
+void TicTacToeManager::save_game(unique_ptr<TicTacToe>& game)
 {
-	update_winner_count(game.get_winner());
+	update_winner_count(game->get_winner());
 	
-	games.push_back(game);
+	games.push_back(std::move(game));
+}
+
+const std::vector<std::unique_ptr<TicTacToe>> & TicTacToeManager::get_games()
+{
+	return games;
+}
+
+void TicTacToeManager::get_winner_totals(int& x, int& o, int& c)
+{
+	x = x_win;
+
+	o = o_win;
+
+	c = ties;
+}
+
+unique_ptr<TicTacToe> get_game(int game_type)
+{
+	if (game_type == 3)
+	{
+		return make_unique<TicTacToe3>();
+	}
+	else
+	{
+		return make_unique<TicTacToe4>();
+	}
 }
 
 void TicTacToeManager::update_winner_count(string winner)

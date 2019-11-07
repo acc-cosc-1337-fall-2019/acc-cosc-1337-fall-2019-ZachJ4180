@@ -10,34 +10,51 @@ Class Constructor
    function to add the string Game to it --> "Game"
 @param wxWindow* the parent window for the Panel class
 */
-Panel::Panel(wxWindow* parent)
-	: wxPanel(parent, -1)
+Panel::Panel(wxWindow* parent) : wxPanel(parent, -1)
 {
 	//1. Create unique pointer of TicTacToeManager
+	manager = std::make_unique<TicTacToeManager>();
 
 
 	auto vbox = new wxBoxSizer(wxVERTICAL);
+
 	auto top_horizontal_box = get_top_box_sizer();
 
 	auto mid_horizontal_box = get_mid_box_sizer();
+
+
 	tic_tac_toe_grid_3 = get_grid_sizer(3);
+
 	tic_tac_toe_grid_3->Show(false);
+
 	tic_tac_toe_grid_4 = get_grid_sizer(4);
+
 	tic_tac_toe_grid_4->Show(false);
+
 
 	/*2.
 	Call the manager get_games function and save games to a local const vector& reference
 	Using auto& for loop, loop through each game and call the history list box Append
 	function to add the string Game to it --> "Game"*/
+	const vector<unique_ptr<TicTacToe>>& games = manager->get_games();
 
+	for (auto& game : games)
+	{
+		history_list_box->Append("Game");
+	}
 
 
 	vbox->Add(top_horizontal_box, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, 10);
+
 	vbox->Add(mid_horizontal_box, 0, wxEXPAND | wxLEFT | wxRIGHT | wxTOP, 10);
+
 	vbox->Add(tic_tac_toe_grid_3, 0, wxALIGN_RIGHT | wxTOP | wxRIGHT | wxBOTTOM, 10);
+
 	vbox->Add(tic_tac_toe_grid_4, 0, wxALIGN_RIGHT | wxTOP | wxRIGHT | wxBOTTOM, 10);
 
+
 	set_winner_labels();
+
 
 	SetSizer(vbox);
 }
@@ -63,7 +80,7 @@ void Panel::on_list_box_click(wxCommandEvent& event)
 	//STUDENT MUST WRITE CODE FOR THIS
 	//1) Write code to get a reference to a vector of boards by calling the manager get_games function
 	//Example const std::vector<std::unique_ptr<SomeClass>>& my_class_vector = other_class->get_classes()
-
+	const auto& games = manager->get_games();
 
 	/*STUDENT MUST WRITE CODE FOR THIS
 	2) Write code to get a reference to one board using the history_list_box GetSelection function as
@@ -72,21 +89,25 @@ void Panel::on_list_box_click(wxCommandEvent& event)
 	   The history list box can give you the index by calling its GetSelection function
 	   Use the Example from #1 above as guidance.
 	*/
+	auto& board = games[history_list_box->getSelection()];
 
 
 	wxGridSizer* sizer;
 
-	if (9 == 9)
+	if (board->get_pegs().size() == 9)
 	{
 		sizer = tic_tac_toe_grid_3;
-		tic_tac_toe_grid_4->Show(false);
-		tic_tac_toe_grid_3->Show(true);
 
+		tic_tac_toe_grid_4->Show(false);
+
+		tic_tac_toe_grid_3->Show(true);
 	}
 	else
 	{
 		sizer = tic_tac_toe_grid_4;
+
 		tic_tac_toe_grid_3->Show(false);
+
 		tic_tac_toe_grid_4->Show(true);
 	}
 
@@ -96,16 +117,21 @@ void Panel::on_list_box_click(wxCommandEvent& event)
 
 		//STUDENT ACTION REQUIRED: REMOVE COMMENTS TO RUN STATEMENT BELOW
 		//item->GetWindow()->SetLabel(board->get_pegs()[i - 1]);
+		item->GetWindow()->SetLabel(board->get_pegs()[i - 1]);
+		
 		item->GetWindow()->Disable();
+
 		i++;
 	}
 
 	/*STUDENT MUST WRITE CODE FOR THIS
 	5)Call the winner_text SetValue function and pass the board get_winner() return value
 	as its parameter argument*/
+	winner_text->SetValue(board->get_winner());
 
 
 	set_winner_labels();
+
 	this->Layout();
 }
 
@@ -125,7 +151,9 @@ Event function will execute each time the start button is clicked.
 void Panel::on_start_button_click(wxCommandEvent & event)
 {
 	set_button_properties(tic_tac_toe_grid_3);
+
 	set_button_properties(tic_tac_toe_grid_4);
+
 
 	if (game_type_radio->GetSelection() == 0)
 	{
@@ -138,9 +166,11 @@ void Panel::on_start_button_click(wxCommandEvent & event)
 		pass 3,4, or if you have my solution the values GameType::three or GameType::four
 		as parameter arguments to the get_game function
 		*/
+		board = manager->get_game(3);
 
 
 		tic_tac_toe_grid_4->Show(false);
+
 		tic_tac_toe_grid_3->Show(true);
 	}
 	else if (game_type_radio->GetSelection() == 1)
@@ -153,10 +183,11 @@ void Panel::on_start_button_click(wxCommandEvent & event)
 		pass 3,4, or if you have my solution the values GameType::three or GameType::four
 		as parameter arguments to the get_game function
 		*/
-
+		board = manager->get_game(4);
 
 
 		tic_tac_toe_grid_3->Show(false);
+
 		tic_tac_toe_grid_4->Show(true);
 	}
 
@@ -165,10 +196,20 @@ void Panel::on_start_button_click(wxCommandEvent & event)
 		to determine whether X or O goes first.
 	   if radio button selection 0 call the board start game function with X or O
 	*/
-
+	if (first_player_radio->GetSelection() == 0)
+	{
+		board->start_game("X");
+	}
+	else
+	{
+		board->start_game("O");
+	}
+	
 
 	auto btn = dynamic_cast<wxButton*>(event.GetEventObject());
+
 	btn->Disable();
+
 	this->Layout();
 }
 
@@ -189,9 +230,12 @@ void Panel::on_peg_button_click(wxCommandEvent & event)
 {
 	//Get the button that was clicked(or fired the event)
 	auto btn = dynamic_cast<wxButton*>(event.GetEventObject());
+
 	btn->Disable();
 
+
 	auto val = btn->GetLabel();
+
 
 	/*
 	STUDENT MUST WRITE CODE FOR THIS
@@ -200,7 +244,7 @@ void Panel::on_peg_button_click(wxCommandEvent & event)
 	return value as its parameter argument
 	Example: some_btn->SetLabel(my_class->some_function())
 	*/
-
+	btn->SetLabel(board->get_player());
 
 	/*Call the board's mark_board function and pass the val value as its parmater argument
 	use the std::stoi to convert from string to int
@@ -209,13 +253,19 @@ void Panel::on_peg_button_click(wxCommandEvent & event)
 	*/
 	board->mark_board(std::stoi(val.ToStdString()));
 
+
 	if (board->game_over())
 	{
 		wxMessageBox(wxT("Winner!"), wxT("TicTacToe"), wxICON_INFORMATION);
+
 		history_list_box->Append("game");
+
 		winner_text->SetLabel(board->get_winner());
+
 		start_button->Enable();
+
 		manager->save_game(std::move(board));
+
 		set_winner_labels();
 	}
 }
@@ -233,18 +283,20 @@ void Panel::set_winner_labels()
 	STUDENT MUST WRITE CODE FOR THIS
 	1. Write code to call the manager get winner total and pass the x, o, and c variables as parameters
 	*/
-
+	manager->get_winner_totals(x, o, c);
 
 	/*
 	STUDENT ACTION REQUIRED
 	Remove comments below to properly set labels
 	*/
 
-	/*
+	
 	x_winner_label->SetValue(std::to_string(x));
+
 	o_winner_label->SetValue(std::to_string(o));
+
 	c_winner_label->SetValue(std::to_string(c));
-	*/
+	
 
 	this->Layout();
 }
@@ -264,10 +316,13 @@ Enables all the buttons for mouse clicks.
 void Panel::set_button_properties(wxGridSizer* sizer)
 {
 	int i = 1;
+
 	for (auto item : sizer->GetChildren())
 	{
 		item->GetWindow()->SetLabel(std::to_string(i));
+
 		item->GetWindow()->Enable();
+
 		i++;
 	}
 }
@@ -279,41 +334,67 @@ Creates a box sizer with two radio buttons and one list box to display at the to
 wxBoxSizer * Panel::get_top_box_sizer()
 {
 	wxString game_type_choices[]{ wxT("Tic Tac Toe 3"), wxT("Tic Tac Toe 4") };
+
 	wxString first_player_choices[]{ wxT("X"), wxT("O") };
 
+
 	auto hbox0 = new wxBoxSizer(wxHORIZONTAL);
+
 	game_type_radio = new wxRadioBox(this, -1, wxT("Game Type"), wxDefaultPosition, wxDefaultSize,
 		WXSIZEOF(game_type_choices), game_type_choices, 1, wxRA_SPECIFY_COLS);
+
 
 	first_player_radio = new wxRadioBox(this, -1, wxT("First Player"), wxDefaultPosition,
 		wxDefaultSize, WXSIZEOF(first_player_choices), first_player_choices, 1, wxRA_SPECIFY_COLS);
 
+
 	history_list_box = new wxListBox(this, -1, wxPoint(-1, -1), wxSize(-1, -1));
+
 	history_list_box->Bind(wxEVT_LISTBOX, &Panel::on_list_box_click, this);
+
 
 	auto hbox1 = new wxBoxSizer(wxVERTICAL);
 
 	auto label1 = new wxStaticText(this, wxID_ANY, wxT("X: "),
 		wxDefaultPosition, wxSize(70, -1));
+
 	auto label2 = new wxStaticText(this, wxID_ANY, wxT("O: "),
 		wxDefaultPosition, wxSize(70, -1));
+
 	auto label3 = new wxStaticText(this, wxID_ANY, wxT("C: "),
 		wxDefaultPosition, wxSize(70, -1));
 
+
 	x_winner_label = new wxTextCtrl(this, wxID_ANY);
+	x_winner_label->Disable();
+
 	o_winner_label = new wxTextCtrl(this, wxID_ANY);
+	o_winner_label->Disable();
+
 	c_winner_label = new wxTextCtrl(this, wxID_ANY);
+	c_winner_label->Disable();
+
 
 	hbox0->Add(game_type_radio);
+
 	hbox0->Add(first_player_radio);
+
 	hbox0->Add(history_list_box);
+
 	hbox1->Add(label1);
+
 	hbox1->Add(x_winner_label);
+
 	hbox1->Add(label2);
+
 	hbox1->Add(o_winner_label);
+
 	hbox1->Add(label3);
+
 	hbox1->Add(c_winner_label);
+
 	hbox0->Add(hbox1);
+
 
 	return hbox0;
 }

@@ -35,6 +35,9 @@ public:
 
 	string get_winner() const;
 
+	//const std::vector<std::string> & get_pegs();
+	const std::vector<std::string> & TicTacToe::get_pegs()
+
 
 	friend ostream& operator<<(ostream& out, const TicTacToe& t);
 
@@ -43,11 +46,11 @@ public:
 
 protected:
 
-	virtual bool check_column_win();
+	virtual bool check_column_win() = 0;	// "= 0" makes the functions 'pure virtual'
 
-	virtual bool check_row_win();		//virtual makes functions flexible between 3 and 4
+	virtual bool check_row_win() = 0;		//virtual makes functions flexible between x3 and x4
 
-	virtual bool check_diagonal_win();
+	virtual bool check_diagonal_win() = 0;
 
 
 	vector<string> pegs{};	//initializer: | 9 for x3 | 16 for x4 |

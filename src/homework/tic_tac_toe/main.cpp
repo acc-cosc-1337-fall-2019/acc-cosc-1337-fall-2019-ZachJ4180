@@ -13,7 +13,7 @@ int main()
 	char cont = 'y';
 
 
-	TicTacToeManager manager;
+	unique_ptr<TicTacToeManager> manager = std::make_unique<TicTacToeManager>();
 
 	string player;
 
@@ -28,16 +28,16 @@ int main()
 		cin >> game_type;
 
 
-		TicTacToe* game;
+		unique_ptr<TicTacToe> game;
 
 
 		if (game_type == 3)
 		{
-			game = new TicTacToe3();
+			game = std::make_unique<TicTacToe3>();
 		}
 		else
 		{
-			game = new TicTacToe4();
+			game = std::make_unique<TicTacToe4>();
 		}
 
 
@@ -56,7 +56,7 @@ int main()
 			cout << *game;
 		}
 
-		manager.save_game(*game);
+		manager->save_game(game);
 
 
 		cout << "Game over: ";
@@ -68,6 +68,10 @@ int main()
 
 
 	} while (cont == 'y' || cont == 'Y');
+
+	cout << "History: \n";
+
+	cout << *manager;
 
 
 	return 0;

@@ -3,20 +3,28 @@
 #ifndef TIC_TAC_TOE_MANAGER_H
 #define TIC_TAC_TOE_MANAGER_H
 
-#include <functional>
+#include <memory>
 #include <vector>
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 
 using std::vector;
-using std::reference_wrapper;
+using std::unique_ptr;
 
 class TicTacToeManager
 {
 public:
 
-	void save_game(TicTacToe& game);
+	void save_game(unique_ptr<TicTacToe>& game);
 
-	friend ostream & operator << (ostream & out, TicTacToeManager & m);
+	const std::vector<std::unique_ptr<TicTacToe>> & get_games();
+
+	void get_winner_totals(int& x, int& o, int& c);
+
+	unique_ptr<TicTacToe> get_game(int game_type);	//ienumeration
+
+	friend ostream & operator << (ostream & out, unique_ptr<TicTacToe> & m);
 
 
 private:
@@ -24,7 +32,7 @@ private:
 	void update_winner_count(string winner);
 
 
-	vector <reference_wrapper<TicTacToe>> games;
+	vector<unique_ptr<TicTacToe>> games;
 
 
 	int x_win{ 0 };
