@@ -89,7 +89,7 @@ void Panel::on_list_box_click(wxCommandEvent& event)
 	   The history list box can give you the index by calling its GetSelection function
 	   Use the Example from #1 above as guidance.
 	*/
-	auto& board = games[history_list_box->getSelection()];
+	auto& board = games[history_list_box->GetSelection()];
 
 
 	wxGridSizer* sizer;

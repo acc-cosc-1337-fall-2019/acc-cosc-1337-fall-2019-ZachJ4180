@@ -136,7 +136,7 @@ void TicTacToe::set_winner()
 	}
 }
 
-std::vector<std::string> & TicTacToe::get_pegs()
+const std::vector<std::string> & TicTacToe::get_pegs()
 {
 	return pegs;
 }

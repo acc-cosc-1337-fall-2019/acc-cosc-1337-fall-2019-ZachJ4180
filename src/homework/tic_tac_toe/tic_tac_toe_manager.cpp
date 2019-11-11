@@ -2,7 +2,7 @@
 
 //cpp
 
-ostream & operator<<(ostream & out, unique_ptr<TicTacToeManager> & m)
+ostream & operator<<(ostream & out, TicTacToeManager & m)
 {
 	for (auto& game : m.games)
 	{
@@ -41,7 +41,7 @@ void TicTacToeManager::get_winner_totals(int& x, int& o, int& c)
 	c = ties;
 }
 
-unique_ptr<TicTacToe> get_game(int game_type)
+unique_ptr<TicTacToe> TicTacToeManager::get_game(int game_type)
 {
 	if (game_type == 3)
 	{

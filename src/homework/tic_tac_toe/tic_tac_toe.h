@@ -36,7 +36,7 @@ public:
 	string get_winner() const;
 
 	//const std::vector<std::string> & get_pegs();
-	const std::vector<std::string> & TicTacToe::get_pegs()
+	const std::vector<std::string> & TicTacToe::get_pegs();
 
 
 	friend ostream& operator<<(ostream& out, const TicTacToe& t);

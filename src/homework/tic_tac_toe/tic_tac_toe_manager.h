@@ -11,6 +11,7 @@
 
 using std::vector;
 using std::unique_ptr;
+using std::make_unique;
 
 class TicTacToeManager
 {
@@ -24,7 +25,7 @@ public:
 
 	unique_ptr<TicTacToe> get_game(int game_type);	//ienumeration
 
-	friend ostream & operator << (ostream & out, unique_ptr<TicTacToe> & m);
+	friend ostream & operator << (ostream & out, TicTacToeManager & m);
 
 
 private:
