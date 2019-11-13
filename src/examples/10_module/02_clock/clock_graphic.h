@@ -1,4 +1,4 @@
-#ifndef CLOCK_GRAPHIC_H
+	#ifndef CLOCK_GRAPHIC_H
 #define CLOCK_GRAPHIC_H
 #include <memory.h>
 #include <cmath>
