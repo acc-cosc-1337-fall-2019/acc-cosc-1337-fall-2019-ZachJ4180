@@ -3,3 +3,4 @@
 #ADD_SUBDIRECTORY(3_iteration_test)
 #ADD_SUBDIRECTORY(04_vectors)
 ADD_SUBDIRECTORY(tic_tac_toe_test)
+ADD_SUBDIRECTORY(tic_tac_toe_gui)
