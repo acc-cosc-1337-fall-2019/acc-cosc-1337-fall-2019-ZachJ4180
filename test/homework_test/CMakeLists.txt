@@ -2,5 +2,4 @@
 #ADD_SUBDIRECTORY(02_decisions_test)
 #ADD_SUBDIRECTORY(3_iteration_test)
 #ADD_SUBDIRECTORY(04_vectors)
-#ADD_SUBDIRECTORY(tic_tac_toe_test)	//giving errors
-#ADD_SUBDIRECTORY(tic_tac_toe_gui)	//giving errors
+ADD_SUBDIRECTORY(tic_tac_toe_test)
