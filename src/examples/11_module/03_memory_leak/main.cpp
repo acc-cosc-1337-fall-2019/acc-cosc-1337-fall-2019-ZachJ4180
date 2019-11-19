@@ -2,12 +2,12 @@
 
 int main() 
 {
-	memory_leak(); //we leaked memory (a little bit)
+	memory_leak();	//small memory leak		(creating	one pointer			w/o deleting)
 
-	while (true) 
+	while (true)	//large memory leak		(creating	several pointers	w/o deleting)
 	{
-		memory_leak();//leaked lots of memory
+		memory_leak();		//the memory leak*
 	}
-	
+
 	return 0;
 }

@@ -2,13 +2,25 @@
 #include<iostream>
 //
 
+
+{
+return nullptr;
+}
+
 void allocate_use_release()
 {
-	int stack_num{ 5 };//stack variable
-	int* num = new int(5);//heap, data variable.. ALLOCATE
+	int * intPtr;				//declare
 
-	std::cout << *num;//USE 
 
-	delete num;//RELEASE
-	num = nullptr;
+	intPtr = new int(10);		//assign
+
+	cout << *intPtr << "\n";	//use
+
+
+	*intPtr = 100;				//reassign
+
+	cout << *intPtr;			//use
+
+
+	delete intPtr;				//delete
 }
