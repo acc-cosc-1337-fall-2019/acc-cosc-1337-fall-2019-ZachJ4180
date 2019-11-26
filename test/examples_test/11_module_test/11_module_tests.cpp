@@ -18,5 +18,5 @@ TEST_CASE("Test reference and pointers parameters")
 	ref(num_ref, num_ptr);
 
 	REQUIRE(num1 == 500)
-	REQUIRE (num2 == 1000);
+	REQUIRE(num2 == 1000);
 }
