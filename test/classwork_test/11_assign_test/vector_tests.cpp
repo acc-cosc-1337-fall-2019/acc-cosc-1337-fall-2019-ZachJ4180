@@ -8,16 +8,16 @@ TEST_CASE("Verify Test Configuration", "verification") {
 
 TEST_CASE("Test vector class copy wiht stack variables")
 {
-	Vector v(5);
-	Vector v2 = v;
+	Vector<int> v(5);
+	Vector<int> v2 = v;
 
 	REQUIRE(v.Size() == v2.Size());
 }
 
 TEST_CASE("Test vector class copy with heap(dynamic) variables")
 {
-	Vector v(5);
-	Vector v2 = v;
+	Vector<int> v(5);
+	Vector<int> v2 = v;
 
 	v[1] = 5;
 
@@ -26,8 +26,8 @@ TEST_CASE("Test vector class copy with heap(dynamic) variables")
 
 TEST_CASE("Test vector class copy with 2 instances of vector")
 {
-	Vector v(3);
-	Vector v2(2);
+	Vector<int> v(3);
+	Vector<int> v2(2);
 
 	v2 = v;
 
@@ -36,18 +36,18 @@ TEST_CASE("Test vector class copy with 2 instances of vector")
 	REQUIRE(v[1] != v2[1]);
 }
 
-//TEST_CASE("Test return Vector by value")
-//{
-//	Vector v(1);
-//
-//	v = get_vector();	//sets v to a vector with size 3
-//
-//	REQUIRE(v.Size() == 3);
-//}
+TEST_CASE("Test return Vector by value")
+{
+	Vector<int> v(1);
+
+	v = get_vector();	//sets v to a vector with size 3
+
+	REQUIRE(v.Size() == 3);
+}
 
 TEST_CASE("Test reserve function new allocation")
 {
-	Vector v;
+	Vector<int> v;
 
 	REQUIRE(v.Capacity() == 0;
 
@@ -58,7 +58,7 @@ TEST_CASE("Test reserve function new allocation")
 
 TEST_CASE("Test resize function new size")
 {
-	Vector v;
+	Vector<int> v;
 
 	REQUIRE(v.Capacity() == 0);
 
@@ -69,7 +69,7 @@ TEST_CASE("Test resize function new size")
 
 TEST_CASE("Test push back with default constructor")
 {
-	Vector v;
+	Vector<int> v;
 
 	REQUIRE(v.Size() == 0);
 

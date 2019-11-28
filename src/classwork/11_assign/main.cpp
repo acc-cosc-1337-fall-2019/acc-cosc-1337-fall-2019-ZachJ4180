@@ -4,7 +4,11 @@ Vector get_vector();
 
 int main()
 {
-	return 0;
+	Vector<double> = v(1);
+
+	v[0] = 2.5;
+
+	std::cout << v[0];
 }
 
 Vector get_vector()
