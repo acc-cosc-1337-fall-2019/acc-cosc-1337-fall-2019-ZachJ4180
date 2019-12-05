@@ -31,7 +31,7 @@ int main()
 
 	delete[] numbers;				//removes the numbers array from memory ("deallocate")
 
-	numbers == nullptr;				//sets the numbers array to NULL
+	numbers = nullptr;				//sets the numbers array to NULL
 
 	return 0;
 }
